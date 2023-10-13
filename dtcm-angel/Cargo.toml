@@ -1,0 +1,38 @@
+[package]
+name = "dtcm-angel"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies.serde]
+version = "1"
+features = ["derive"]
+
+[dependencies.chrono]
+version = "0.4"
+
+[dependencies.byteorder]
+version = "1"
+
+[dependencies.serde_repr]
+version = "0.1"
+
+[dependencies.dtcm-angel-utils]
+path = "../dtcm-angel-utils"
+
+[dependencies.dtcm-angel-derive]
+path = "../dtcm-angel-derive"
+
+[dev-dependencies.tokio]
+version = "1"
+features = ["macros", "rt-multi-thread"]
+
+[dev-dependencies.tokio-stream]
+version = "0.1"
+
+[dev-dependencies.dotenv]
+version = "0.15"
+
+[dev-dependencies.serde_json]
+version = "1"

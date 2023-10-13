@@ -1,0 +1,56 @@
+[package]
+name = "dtcm-angel-utils"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies.log]
+version = "0.4"
+
+[dependencies.serde]
+version = "1"
+features = ["derive"]
+
+[dependencies.serde_json]
+version = "1"
+
+[dependencies.reqwest]
+version = "0.11"
+features = ["json", "gzip", "brotli", "deflate"]
+
+[dependencies.tokio-tungstenite]
+version = "0.20"
+
+[dependencies.futures-util]
+version = "0.3"
+features = ["sink"]
+
+[dependencies.local-ip-address]
+version = "0.5"
+
+[dependencies.mac_address]
+version = "1.1"
+
+[dependencies.totp-rs]
+version = "5.0"
+
+[dependencies.async-trait]
+version = "0.1"
+
+[dependencies.chrono]
+version = "0.4"
+
+[dependencies.tokio]
+version = "1"
+features = ["net", "sync", "io-util", "rt-multi-thread", "time"]
+
+[dependencies.tokio-stream]
+version = "0.1"
+
+[dependencies.pin-project]
+version = "1.0"
+
+[dev-dependencies.tokio]
+version = "1"
+features = ["macros", "rt-multi-thread"]

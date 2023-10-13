@@ -1,0 +1,33 @@
+[package]
+name = "dtcm-angel-derive"
+version = "0.1.0"
+edition = "2021"
+authors = ["DeepTech Capital Management <research@dtcm.ai>"]
+categories = ["finance", "no-std::no-alloc"]
+description = "Macros implementation of #[derive(EndPoint, Get, GetVec, Post, PostVec)] for Angel One SDK"
+documentation = "https://serde.rs/derive.html"
+homepage = "https://www.dtcm.ai"
+keywords = ["angelone", "algotrading", "trading", "stocks", "investment", "api"]
+license = "MIT OR Apache-2.0"
+readme = "crates-io.md"
+repository = "https://github.com/serde-rs/serde"
+rust-version = "1.72"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "dtcm_angel_derive"
+proc-macro = true
+
+[dependencies.proc-macro2]
+version = "1.0"
+
+[dependencies.syn]
+version = "2.0"
+features = ["parsing"]
+
+[dependencies.quote]
+version = "1.0"
+
+
+[dev-dependencies.dtcm-angel-utils]
+path = "../dtcm-angel-utils"
