@@ -16,5 +16,4 @@ Angel One License applies, where they claim to, including but not limited to bac
 If you succeed in your algorithmic journey using this code or for any algorithmic trading related discussion, do say us "Hello":
 
 - <a href="https://discord.gg/p7aQKV76">Discord</a>
-- <a href="https://www.reddit.com/r/dtcmai">Reddit</a>
 - <a href="https://twitter.com/dtcm_ai">X</a>
