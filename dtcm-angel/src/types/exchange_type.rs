@@ -1,5 +1,5 @@
 /// Exchange Type
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone, Copy)]
 pub enum ExchangeType {
     /// BSE Equity
     BSE,
@@ -9,6 +9,10 @@ pub enum ExchangeType {
     NFO,
     /// MCX Commodity
     MCX,
+    /// BSE Futures and Options
+    BFO,
+    /// Currency Derivate Segment
+    CDS,
 }
 
 impl Default for ExchangeType {
@@ -18,7 +22,7 @@ impl Default for ExchangeType {
 }
 
 /// Exchange type for market data requests
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash, Clone, Copy)]
 pub enum MarketDataExchange {
     /// NSE Equity
     NSE,

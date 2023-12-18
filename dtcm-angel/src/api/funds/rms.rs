@@ -18,15 +18,15 @@ pub struct Rms {
     #[serde(rename = "utiliseddebits")]
     pub utilized_debits: String,
     #[serde(rename = "utilisedspan")]
-    pub utilized_span: String,
+    pub utilized_span: Option<String>,
     #[serde(rename = "utilisedoptionpremium")]
-    pub utilized_option_premium: String,
+    pub utilized_option_premium: Option<String>,
     #[serde(rename = "utilisedholdingsales")]
-    pub utilized_holding_sales: String,
+    pub utilized_holding_sales: Option<String>,
     #[serde(rename = "utilisedexposure")]
-    pub utilized_exposure: String,
+    pub utilized_exposure: Option<String>,
     #[serde(rename = "utilisedturnover")]
-    pub utilized_turnover: String,
+    pub utilized_turnover: Option<String>,
     #[serde(rename = "utilisedpayout")]
-    pub utilized_payout: String,
+    pub utilized_payout: Option<String>,
 }

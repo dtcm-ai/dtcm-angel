@@ -1,5 +1,5 @@
 /// Transaction Types
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone, Copy)]
 pub enum TransactionType {
     #[serde(rename = "BUY")]
     /// Buy

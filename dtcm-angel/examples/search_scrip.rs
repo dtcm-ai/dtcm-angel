@@ -1,4 +1,4 @@
-use dtcm_angel::SmartConnect;
+use dtcm_angel::{types::ExchangeType, SmartConnect};
 
 #[tokio::main]
 async fn main() {
@@ -12,6 +12,6 @@ async fn main() {
     let mut sc = SmartConnect::new(api_key, client_code, pin).await.unwrap();
     sc.generate_session(otp_token).await.unwrap();
 
-    let rms = sc.rms_limit().await.unwrap();
-    println!("{:?}", rms);
+    let res = sc.search_scrip(ExchangeType::NSE, "SBIN").await.unwrap();
+    println!("{:?}", res);
 }

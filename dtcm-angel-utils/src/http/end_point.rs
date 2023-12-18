@@ -17,30 +17,38 @@ const PUBLISHER_LOGIN: &str = "https://smartapi.angelbroking.com/publisher-login
 
 #[allow(missing_docs)]
 /// Angel One API Endpoints
-#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub enum EndPoint {
     Login,
     Logout,
     Token,
     Refresh,
     UserProfile,
+
     OrderPlace,
     OrderModify,
     OrderCancel,
     OrderBook,
+
     LtpData,
     TradeBook,
     RmsLimit,
     Holding,
     Position,
     ConvertPosition,
+
     GttCreate,
     GttModify,
     GttCancel,
     GttDetails,
     GttList,
+
     CandleData,
-    Quote,
+    MarketData,
+    SearchScrip,
+    AllHolding,
+    IndividualOrderDetails(String),
+    MarginApi,
 }
 
 impl EndPoint {
@@ -71,23 +79,34 @@ impl Display for EndPoint {
             Token => write!(f, "/rest/auth/angelbroking/jwt/v1/generateTokens"),
             Refresh => write!(f, "/rest/auth/angelbroking/jwt/v1/generateTokens"),
             UserProfile => write!(f, "/rest/secure/angelbroking/user/v1/getProfile"),
+
             OrderPlace => write!(f, "/rest/secure/angelbroking/order/v1/placeOrder"),
             OrderModify => write!(f, "/rest/secure/angelbroking/order/v1/modifyOrder"),
             OrderCancel => write!(f, "/rest/secure/angelbroking/order/v1/cancelOrder"),
             OrderBook => write!(f, "/rest/secure/angelbroking/order/v1/getOrderBook"),
+
             LtpData => write!(f, "/rest/secure/angelbroking/order/v1/getLtpData"),
             TradeBook => write!(f, "/rest/secure/angelbroking/order/v1/getTradeBook"),
             RmsLimit => write!(f, "/rest/secure/angelbroking/user/v1/getRMS"),
             Holding => write!(f, "/rest/secure/angelbroking/portfolio/v1/getHolding"),
             Position => write!(f, "/rest/secure/angelbroking/order/v1/getPosition"),
             ConvertPosition => write!(f, "/rest/secure/angelbroking/order/v1/convertPosition"),
+
             GttCreate => write!(f, "/gtt-service/rest/secure/angelbroking/gtt/v1/createRule"),
             GttModify => write!(f, "/gtt-service/rest/secure/angelbroking/gtt/v1/modifyRule"),
             GttCancel => write!(f, "/gtt-service/rest/secure/angelbroking/gtt/v1/cancelRule"),
             GttDetails => write!(f, "/rest/secure/angelbroking/gtt/v1/ruleDetails"),
             GttList => write!(f, "/rest/secure/angelbroking/gtt/v1/ruleList"),
+
             CandleData => write!(f, "/rest/secure/angelbroking/historical/v1/getCandleData"),
-            Quote => write!(f, "/rest/secure/angelbroking/market/v1/quote/"),
+            MarketData => write!(f, "/rest/secure/angelbroking/market/v1/quote/"),
+            SearchScrip => write!(f, "/rest/secure/angelbroking/order/v1/searchScrip"),
+            AllHolding => write!(f, "/rest/secure/angelbroking/portfolio/v1/getAllHolding"),
+
+            IndividualOrderDetails(order_id) => {
+                write!(f, "/rest/secure/angelbroking/order/v1/details/{order_id}")
+            }
+            MarginApi => write!(f, "/rest/secure/angelbroking/margin/v1/batch"),
         }
     }
 }

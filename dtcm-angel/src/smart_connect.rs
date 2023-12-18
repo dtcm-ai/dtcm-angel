@@ -3,23 +3,23 @@ use std::{collections::HashMap, fmt::Display};
 use dtcm_angel_utils::http::{HttpClient, HttpFetcher, HttpSender, INSTRUMENT_URL};
 
 use crate::{
-    funds::Rms,
+    funds::{MarginCalculatorPosition, MarginCalculatorReq, MarginCalculatorRes, Rms},
     gtt::{
         CancelRuleReq, CancelRuleRes, CreateRuleReq, CreateRuleRes, ModifyRuleReq, ModifyRuleRes,
         RuleDetailReq, RuleDetailRes, RuleListReq, RuleListRes,
     },
     market::{
         CandleDataReq, CandleDataRes, Instrument, LtpDataReq, LtpDataRes, MarketDataReq,
-        MarketDataRes,
+        MarketDataRes, SearchScripReq, SearchScripRes,
     },
     order::{
-        CancelOrderReq, CancelOrderRes, ModifyOrderReq, ModifyOrderRes, OrderBook, PlaceOrderReq,
-        PlaceOrderRes, TradeBook,
+        CancelOrderReq, CancelOrderRes, IndividualOrderStatus, ModifyOrderReq, ModifyOrderRes,
+        OrderBook, PlaceOrderReq, PlaceOrderRes, TradeBook,
     },
-    portfolio::{ConvertPositionReq, Holding, Position},
+    portfolio::{AllHoldings, ConvertPositionReq, Holding, Position},
     types::{
-        ExchangeType, Interval, MarketDataExchange, MarketMode, OrderVariety, RuleType,
-        TransactionType,
+        ExchangeType, Interval, MarketDataExchange, MarketMode, OrderVariety, ProductType,
+        RuleType, TransactionType,
     },
     user::{LogoutReq, Profile, SessionReq, SessionRes, TokenReq},
     Result,
@@ -249,6 +249,14 @@ impl SmartConnect {
         OrderBook::fetch_vec(&self.http, &{}).await
     }
 
+    /// Fetches the order status by its id
+    pub async fn order_status<O>(&self, unique_order_id: O) -> Result<IndividualOrderStatus>
+    where
+        O: Into<String>,
+    {
+        IndividualOrderStatus::fetch_data(&self.http, unique_order_id).await
+    }
+
     /// Fetches the trade book
     pub async fn trade_book(&self) -> Result<Vec<TradeBook>> {
         TradeBook::fetch_vec(&self.http, &{}).await
@@ -275,6 +283,11 @@ impl SmartConnect {
     /// Returns current portfolio holdings
     pub async fn holdings(&self) -> Result<Vec<Holding>> {
         Holding::fetch_vec(&self.http, &{}).await
+    }
+
+    /// Returns all the portfolio holdings
+    pub async fn all_holdings(&self) -> Result<AllHoldings> {
+        AllHoldings::fetch_data(&self.http, &{}).await
     }
 
     /// Returns the portfolio position holdings
@@ -328,5 +341,47 @@ where {
     /// Sends the Candle data request
     pub async fn candle_data(&self, candle_data_req: &CandleDataReq) -> Result<CandleDataRes> {
         candle_data_req.send_data(&self.http).await
+    }
+
+    /// Searches the scrip
+    pub async fn search_scrip<S>(&self, exchange: ExchangeType, scrip: S) -> Result<SearchScripRes>
+    where
+        S: Into<String>,
+    {
+        let req = SearchScripReq::new(exchange, scrip);
+        req.send_data(&self.http).await
+    }
+
+    /// Returns a new margin position to calculate the margin
+    pub fn new_margin_calculator_position<T, P>(
+        exchange: ExchangeType,
+        product_type: ProductType,
+        trade_type: TransactionType,
+        token: T,
+        price: P,
+        quantity: usize,
+    ) -> MarginCalculatorPosition
+    where
+        T: Into<String>,
+        P: Into<f64>,
+    {
+        MarginCalculatorPosition::new(
+            exchange,
+            product_type,
+            trade_type,
+            token,
+            price.into(),
+            quantity,
+        )
+    }
+
+    /// Sends the margin calculation request
+    pub async fn calculate_margin<P>(&self, positions: P) -> Result<MarginCalculatorRes>
+    where
+        P: AsRef<[MarginCalculatorPosition]>,
+    {
+        let mut margin_calc_req = MarginCalculatorReq::new();
+        margin_calc_req.add_positions(positions);
+        margin_calc_req.send_data(&self.http).await
     }
 }

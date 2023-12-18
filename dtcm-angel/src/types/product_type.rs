@@ -1,5 +1,5 @@
 /// Product type
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone, Copy)]
 pub enum ProductType {
     #[serde(rename = "DELIVERY")]
     /// Cash & Carry for equity (CNC)

@@ -15,7 +15,7 @@ async fn main() {
 
     assert!(sc.place_order(&order_req).await.is_err());
 
-    order_req = order_req.quantity(1);
+    order_req = order_req.quantity(1).price(200);
 
     let resp = sc.place_order(&order_req).await.unwrap();
     let order_id = resp.order_id.unwrap();

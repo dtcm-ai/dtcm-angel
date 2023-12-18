@@ -4,7 +4,7 @@ use crate::types::{ExchangeType, MarketMode};
 
 /// Market data request
 #[derive(Debug, Serialize)]
-#[api(POST, Quote)]
+#[api(POST, MarketData)]
 pub struct MarketDataReq {
     /// Market data mode
     pub mode: MarketMode,

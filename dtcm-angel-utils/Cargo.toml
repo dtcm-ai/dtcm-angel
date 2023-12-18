@@ -1,7 +1,16 @@
 [package]
 name = "dtcm-angel-utils"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
+authors = ["DeepTech Capital Management <research@dtcm.ai>"]
+categories = ["finance", "algorithm", "algorithmic trading", "algotrade"]
+description = "Angel One SDK Utils"
+documentation = "https://github.com/dtcm-ai/dtcm-angel"
+homepage = "https://www.dtcm.ai"
+keywords = ["angelone", "algotrading", "trading", "stocks", "investment", "api"]
+license = "MIT OR Apache-2.0"
+readme = "crates-io.md"
+rust-version = "1.74"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -20,7 +29,7 @@ version = "0.11"
 features = ["json", "gzip", "brotli", "deflate"]
 
 [dependencies.tokio-tungstenite]
-version = "0.20"
+version = "0.21"
 
 [dependencies.futures-util]
 version = "0.3"

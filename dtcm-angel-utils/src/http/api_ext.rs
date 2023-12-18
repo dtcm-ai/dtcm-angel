@@ -8,7 +8,9 @@ pub trait Api {
     /// Returns the endpoint for the implemented object
     fn end_point() -> super::EndPoint;
     /// Returns the url for the implemented object
-    fn url() -> String;
+    fn url() -> String {
+        Self::end_point().url()
+    }
 }
 
 /// Implementation to make GET requests to the API

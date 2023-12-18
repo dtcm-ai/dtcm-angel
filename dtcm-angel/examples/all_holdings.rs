@@ -12,6 +12,6 @@ async fn main() {
     let mut sc = SmartConnect::new(api_key, client_code, pin).await.unwrap();
     sc.generate_session(otp_token).await.unwrap();
 
-    let rms = sc.rms_limit().await.unwrap();
-    println!("{:?}", rms);
+    let res = sc.all_holdings().await.unwrap();
+    println!("{:?}", res);
 }

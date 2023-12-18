@@ -23,6 +23,9 @@ pub struct ModifyOrderRes {
     /// Order ID
     #[serde(rename = "orderid")]
     pub order_id: String,
+    /// Unique order id
+    #[serde(rename = "uniqueorderid")]
+    pub unique_order_id: Option<String>,
 }
 
 impl ModifyOrderReq {

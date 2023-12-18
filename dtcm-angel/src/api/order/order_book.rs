@@ -54,6 +54,8 @@ pub struct OrderBook {
     pub unfilled_shares: String,
     #[serde(rename = "orderid")]
     pub order_id: String,
+    #[serde(rename = "uniqueorderid")]
+    pub unique_order_id: Option<String>,
     pub text: String,
     pub status: String,
     #[serde(rename = "orderstatus")]

@@ -1,4 +1,7 @@
-use dtcm_angel::SmartConnect;
+use dtcm_angel::{
+    types::{ExchangeType, ProductType, TransactionType},
+    SmartConnect,
+};
 
 #[tokio::main]
 async fn main() {
@@ -12,6 +15,15 @@ async fn main() {
     let mut sc = SmartConnect::new(api_key, client_code, pin).await.unwrap();
     sc.generate_session(otp_token).await.unwrap();
 
-    let rms = sc.rms_limit().await.unwrap();
-    println!("{:?}", rms);
+    let buy_position = SmartConnect::new_margin_calculator_position(
+        ExchangeType::NSE,
+        ProductType::IntraDay,
+        TransactionType::Buy,
+        "3045",
+        0,
+        50,
+    );
+
+    let res = sc.calculate_margin(&[buy_position]).await.unwrap();
+    println!("{:?}", res);
 }

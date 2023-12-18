@@ -22,6 +22,9 @@ pub struct PlaceOrderRes {
     /// Order ID
     #[serde(rename = "orderid")]
     pub order_id: Option<String>,
+    /// Unique order ID
+    #[serde(rename = "uniqueorderid")]
+    pub unique_order_id: Option<String>,
 }
 
 impl PlaceOrderReq {

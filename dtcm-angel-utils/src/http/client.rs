@@ -70,7 +70,7 @@ impl HttpClient {
         })?;
 
         let res: Response<R> = req_res.json().await.map_err(|e| {
-            error!("{ep} response decoding failed: {e}");
+            error!("{ep} {e}");
             e
         })?;
 
